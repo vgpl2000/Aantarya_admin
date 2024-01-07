@@ -1,0 +1,25 @@
+*{
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+#nav-img{
+    width: 100px;
+}
+#nav-txt{
+ text-align: center;
+ margin: auto;
+}
+#admin-img{
+    width: 20px;
+    height: 20px;
+}
+.navbar{
+    padding: 0 5vw;
+    background-color: transparent;
+    border: 2px solid #fed201;
+}
+.d-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
