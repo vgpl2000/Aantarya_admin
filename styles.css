@@ -2,6 +2,14 @@
     font-family: 'IBM Plex Mono', monospace;
 }
 
+.line{
+    height: 0.5vh;
+    width: 100wv;
+    background-color: #000;
+    margin: 2vh 5vw;
+    border-radius: 5px;
+}
+
 /* inspired form gumroad website */
 .button {
     --bg: #000;
@@ -163,7 +171,6 @@
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    width: 100vw;
 }
 
 .team-div{
