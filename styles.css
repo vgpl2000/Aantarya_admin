@@ -1,15 +1,75 @@
-*{
+* {
     font-family: 'IBM Plex Mono', monospace;
 }
-#body-id{
-    display: none;
+
+/* inspired form gumroad website */
+.button {
+    --bg: #000;
+    --hover-bg: #0a579b;
+    --hover-text: #fff;
+    color: #fff;
+    cursor: pointer;
+    border: 1px solid var(--bg);
+    border-radius: 4px;
+    padding: 0.8em 2em;
+    background: var(--bg);
+    transition: 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5vh auto;
+  }
+  
+  .button:hover {
+    color: var(--hover-text);
+    transform: translate(-0.25rem, -0.25rem);
+    background: var(--hover-bg);
+    box-shadow: 0.25rem 0.25rem var(--bg);
+  }
+  
+  .button:active {
+    transform: translate(0);
+    box-shadow: none;
+  }
+  
+
+
+#body-id {
+    /* display: none; */
 }
-#pass-div{
+
+#pass-div {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10vh 0;
 }
+
+/* payment */
+.payment {
+    height: auto;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20vh 0;
+}
+
+.pay-img {
+    width: auto;
+    max-width: 300px;
+    margin: auto;
+}
+
+#screenshot {
+    width: 100%;
+    /* Make the image fill its container */
+    height: auto;
+    /* Maintain the aspect ratio */
+    display: block;
+}
+
 .input1 {
     --input-focus: #2d8cf0;
     --font-color: #323232;
@@ -27,52 +87,59 @@
     color: var(--font-color);
     padding: 5px 10px;
     outline: none;
-  }
-  
-  .input1::placeholder {
+}
+
+.input1::placeholder {
     color: var(--font-color-sub);
     opacity: 0.8;
-  }
-  
-  .input1:focus {
+}
+
+.input1:focus {
     border: 2px solid var(--input-focus);
-  }
+}
 
 
-#nav-img{
+#nav-img {
     width: 100px;
 }
-#nav-txt{
- text-align: center;
- margin: auto;
+
+#nav-txt {
+    text-align: center;
+    margin: auto;
 }
-#admin-img{
+
+#admin-img {
     width: 20px;
     height: 20px;
 }
-.navbar{
+
+.navbar {
     padding: 0 5vw;
     background-color: transparent;
     border: 2px solid #fed201;
 }
-.d-flex{
+
+.d-flex {
     display: flex;
     align-items: center;
     justify-content: space-around;
 }
-.dropdown{
+
+.dropdown {
     margin: 5vh 0;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-.details{
+
+.details {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
 }
-.txt-content{
+
+.txt-content {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -80,16 +147,34 @@
     width: auto;
     margin: 2vh 2vw;
 }
-.txt-desc{
+
+.txt-desc {
     margin: auto 5vw;
 }
-.txt-headings{
+
+.txt-headings {
     text-align: center;
     margin: auto;
     font-size: 1.5rem;
+    width: 100vw;
 }
-.row{
+
+.row {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    width: 100vw;
+}
+
+.team-div{
+    width: 100vw;
+}
+
+/* Accommodation */
+.accommodation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 15vh 0;
 }

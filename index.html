@@ -4,13 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@100;200;300;400;500&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="./styles.css">
     <script src="./script.js" defer></script>
@@ -24,170 +28,217 @@
 
     <div id="body-id">
 
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <img src="./assets/Picture1.png" id="nav-img">
+                <form class="d-flex" role="search">
+                    <p id="nav-txt">Admin</p>
+                    <img src="./assets/user-admin.png" id="admin-img">
+                </form>
+            </div>
+        </nav>
 
-        
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-          <img src="./assets/Picture1.png" id="nav-img">
-          <form class="d-flex" role="search">
-            <p id="nav-txt">Admin</p>
-            <img src="./assets/user-admin.png" id="admin-img">
-          </form>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Registered Colleges
+            </button>
+            <ul class="dropdown-menu" id="clg-list">
+                <li><a class="dropdown-item" href="#">Vivekananda College of Engineering and Technology</a></li>
+                <li><a class="dropdown-item" href="#">St.Philomena College, Puttur</a></li>
+                <li><a class="dropdown-item" href="#">St. Joseph Engineering College</a></li>
+            </ul>
         </div>
-      </nav>
 
-
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-          Registered Colleges
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Vivekananda College of Engineering and Technology</a></li>
-          <li><a class="dropdown-item" href="#">St.Philomena College, Puttur</a></li>
-          <li><a class="dropdown-item" href="#">St. Joseph Engineering College</a></li>
-        </ul>
-      </div>
-
-
-      <div class="details">
-        <div class="txt-content">
-            <p class="txt-desc">Category</p>
-            <input class="txt-content" type="text" value="UG">
-        </div>
-        <p class="txt-headings">EVENTS</p>
-        <div class="txt-content">
-            <p class="txt-desc">Coding</p>
+        <div class="team-div">
+            <p class="txt-headings">TEAM DETAILS</p>
             <div class="row">
-                <input class="txt-content" id="coding-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="coding-mem1-con" type="text" value="Contact Number">
+                <p class="txt-content">Team id</p>
+                <input class="txt-content" id="team-id" type="text" placeholder="Team ID">
             </div>
             <div class="row">
-                <input class="txt-content" id="coding-mem2" type="text" value="Participant-2">
-                <input class="txt-content" id="coding-mem2-con" type="text" value="Contact Number">
+                <p class="txt-content">Team Name</p>
+                <input class="txt-content" id="team-name" type="text" placeholder="Team Name">
             </div>
+            <button class="button" id="team-btn">SAVE</button>
             
         </div>
-        <div class="txt-content">
-            <p class="txt-desc">Web Designing</p>
-            <div class="row">
-                <input class="txt-content" id="web-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="web-mem1-con" type="text" value="Contact Number">
+
+
+        <div class="payment">
+            <p class="txt-headings">PAYMENT</p>
+            <div class="pay-img">
+                <img id="screenshot" src="./assets/screenshot_sample.jpg">
             </div>
-            <div class="row">
-                <input class="txt-content" id="web-mem2" type="text" value="Participant-2">
-                <input class="txt-content" id="web-mem2-con" type="text" value="Contact Number">
-            </div>
+            <p class="txt-content">Transaction id</p>
+            <input class="txt-content" id="tran-id" type="text" placeholder="Transaction ID">
+            <button class="button" id="payment-btn">SAVE</button>
+
+
         </div>
-        <div class="txt-content">
-            <p class="txt-desc">IT Quiz</p>
+
+        <div class="accommodation">
+            <p class="txt-headings">ACCOMMODATION DETAILS</p>
             <div class="row">
-                <input class="txt-content" id="quiz-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="quiz-mem1-con" type="text" value="Contact Number">
+                <p class="txt-content">Accommodation needed</p>
+                <input class="txt-content" id="accommo-check" type="text" placeholder="Yes or No">
             </div>
             <div class="row">
-                <input class="txt-content" id="quiz-mem2" type="text" value="Participant-2">
-                <input class="txt-content" id="quiz-mem2-con" type="text" value="Contact Number">
+                <p class="txt-content">Number of Men</p>
+                <input class="txt-content" id="accommo-no-b" type="text" placeholder="Count">
             </div>
+            <div class="row">
+                <p class="txt-content">Number of Women</p>
+                <input class="txt-content" id="accommo-no-g" type="text" placeholder="Count">
+            </div>
+            <button class="button" id="accommo-btn">SAVE</button>
+            
         </div>
-        <div class="txt-content">
-            <p class="txt-desc">Debate</p>
-            <div class="row">
-                <input class="txt-content" id="debate-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="debate-mem1-con" type="text" value="Contact Number">
+
+
+        <div class="details">
+            <div class="txt-content">
+                <p class="txt-desc">Category</p>
+                <input class="txt-content" type="text" value="UG">
             </div>
+            <p class="txt-headings">EVENTS</p>
+            <div class="txt-content">
+                <p class="txt-desc">Coding</p>
+                <div class="row">
+                    <input class="txt-content" id="coding-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="coding-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="coding-mem2" type="text" placeholder="Participant-2">
+                    <input class="txt-content" id="coding-mem2-con" type="text" placeholder="Contact Number">
+                </div>
+
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">Web Designing</p>
+                <div class="row">
+                    <input class="txt-content" id="web-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="web-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="web-mem2" type="text" placeholder="Participant-2">
+                    <input class="txt-content" id="web-mem2-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">IT Quiz</p>
+                <div class="row">
+                    <input class="txt-content" id="quiz-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="quiz-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="quiz-mem2" type="text" placeholder="Participant-2">
+                    <input class="txt-content" id="quiz-mem2-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">Debate</p>
+                <div class="row">
+                    <input class="txt-content" id="debate-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="debate-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">Dance</p>
+                <div class="row">
+                    <input class="txt-content" id="dance-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="dance-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="dance-mem2" type="text" placeholder="Participant-2">
+                    <input class="txt-content" id="dance-mem2-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="dance-mem3" type="text" placeholder="Participant-3">
+                    <input class="txt-content" id="dance-mem3-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="dance-mem4" type="text" placeholder="Participant-4">
+                    <input class="txt-content" id="dance-mem4-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="dance-mem5" type="text" placeholder="Participant-5">
+                    <input class="txt-content" id="dance-mem5-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="dance-mem6" type="text" placeholder="Participant-6">
+                    <input class="txt-content" id="dance-mem6-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="dance-mem7" type="text" placeholder="Participant-7">
+                    <input class="txt-content" id="dance-mem7-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">Photography</p>
+                <div class="row">
+                    <input class="txt-content" id="photo-mem1" type="text"placeholder="Participant-1">
+                    <input class="txt-content" id="photo-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">Gaming</p>
+                <div class="row">
+                    <input class="txt-content" id="game-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="game-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="game-mem2" type="text" placeholder="Participant-2">
+                    <input class="txt-content" id="game-mem2-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">Treasure Hunt</p>
+                <div class="row">
+                    <input class="txt-content" id="thunt-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="thunt-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="thunt-mem2" type="text" placeholder="Participant-2">
+                    <input class="txt-content" id="thunt-mem2-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">Product Launch</p>
+                <div class="row">
+                    <input class="txt-content" id="product-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="product-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">IT Manager</p>
+                <div class="row">
+                    <input class="txt-content" id="itman-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="itman-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">Designing</p>
+                <div class="row">
+                    <input class="txt-content" id="desig-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="desig-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+            <div class="txt-content">
+                <p class="txt-desc">Product Launch</p>
+                <div class="row">
+                    <input class="txt-content" id="product-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="product-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+            </div>
+
+            <button class="button" id="events-btn">SAVE</button>
+
         </div>
-        <div class="txt-content">
-            <p class="txt-desc">Dance</p>
-            <div class="row">
-                <input class="txt-content" id="dance-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="dance-mem1-con" type="text" value="Contact Number">
-            </div>
-            <div class="row">
-                <input class="txt-content" id="dance-mem2" type="text" value="Participant-2">
-                <input class="txt-content" id="dance-mem2-con" type="text" value="Contact Number">
-            </div>
-            <div class="row">
-                <input class="txt-content" id="dance-mem3" type="text" value="Participant-3">
-                <input class="txt-content" id="dance-mem3-con" type="text" value="Contact Number">
-            </div>
-            <div class="row">
-                <input class="txt-content" id="dance-mem4" type="text" value="Participant-4">
-                <input class="txt-content" id="dance-mem4-con" type="text" value="Contact Number">
-            </div>
-            <div class="row">
-                <input class="txt-content" id="dance-mem5" type="text" value="Participant-5">
-                <input class="txt-content" id="dance-mem5-con" type="text" value="Contact Number">
-            </div>
-            <div class="row">
-                <input class="txt-content" id="dance-mem6" type="text" value="Participant-6">
-                <input class="txt-content" id="dance-mem6-con" type="text" value="Contact Number">
-            </div>
-            <div class="row">
-                <input class="txt-content" id="dance-mem7" type="text" value="Participant-7">
-                <input class="txt-content" id="dance-mem7-con" type="text" value="Contact Number">
-            </div>
-        </div>
-        <div class="txt-content">
-            <p class="txt-desc">Photography</p>
-            <div class="row">
-                <input class="txt-content" id="photo-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="photo-mem1-con" type="text" value="Contact Number">
-            </div>
-        </div>
-        <div class="txt-content">
-            <p class="txt-desc">Gaming</p>
-            <div class="row">
-                <input class="txt-content" id="game-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="game-mem1-con" type="text" value="Contact Number">
-            </div>
-            <div class="row">
-                <input class="txt-content" id="game-mem2" type="text" value="Participant-2">
-                <input class="txt-content" id="game-mem2-con" type="text" value="Contact Number">
-            </div>
-        </div>
-        <div class="txt-content">
-            <p class="txt-desc">Treasure Hunt</p>
-            <div class="row">
-                <input class="txt-content" id="thunt-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="thunt-mem1-con" type="text" value="Contact Number">
-            </div>
-            <div class="row">
-                <input class="txt-content" id="thunt-mem2" type="text" value="Participant-2">
-                <input class="txt-content" id="thunt-mem2-con" type="text" value="Contact Number">
-            </div>
-        </div>
-        <div class="txt-content">
-            <p class="txt-desc">Product Launch</p>
-            <div class="row">
-                <input class="txt-content" id="product-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="product-mem1-con" type="text" value="Contact Number">
-            </div>
-        </div>
-        <div class="txt-content">
-            <p class="txt-desc">IT Manager</p>
-            <div class="row">
-                <input class="txt-content" id="itman-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="itman-mem1-con" type="text" value="Contact Number">
-            </div>
-        </div>
-        <div class="txt-content">
-            <p class="txt-desc">Designing</p>
-            <div class="row">
-                <input class="txt-content" id="desig-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="desig-mem1-con" type="text" value="Contact Number">
-            </div>
-        </div>
-        <div class="txt-content">
-            <p class="txt-desc">Product Launch</p>
-            <div class="row">
-                <input class="txt-content" id="product-mem1" type="text" value="Participant-1">
-                <input class="txt-content" id="product-mem1-con" type="text" value="Contact Number">
-            </div>
-        </div>
-      </div>
     </div>
 
-    
+
 </body>
 
 </html>
