@@ -43,9 +43,9 @@
 
 
 
-/* #body-id {
+#body-id {
   display: none;
-} */
+}
 
 #clg-list{
   height: 30vh;
@@ -190,9 +190,11 @@
   margin: 2vh 0;
 }
 
-.team-div {
-  /* width: 100vw; */
-}
+/* .team-div {
+  /* width: 100vw;
+   
+} 
+*/
 
 /* Accommodation */
 .accommodation {
