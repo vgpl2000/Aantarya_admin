@@ -18,6 +18,7 @@
 
     <link rel="stylesheet" href="./styles.css">
     <script src="./script.js" defer></script>
+    <script src="./dataloader.js" defer></script>
 </head>
 
 <body>
@@ -45,9 +46,10 @@
                 Registered Teams
             </button>
             <ul class="dropdown-menu" id="clg-list">
-                <li><a class="dropdown-item" href="#">Team 1</a></li>
+                <!-- <li><a class="dropdown-item" href="#">Team 1</a></li>
                 <li><a class="dropdown-item" href="#">Team 2</a></li>
-                <li><a class="dropdown-item" href="#">Team 3</a></li>
+                <li><a class="dropdown-item" href="#">Team 3</a></li> -->
+
             </ul>
         </div>
 
@@ -56,7 +58,7 @@
             <div class="line"></div>
             <div class="row">
                 <p class="txt-content">Team id</p>
-                <input class="txt-content" id="team-id" type="text" placeholder="Team ID">
+                <input class="txt-content" id="team-id" type="text" placeholder="Team ID" disabled>
             </div>
             <div class="row">
                 <p class="txt-content">Team Name</p>
@@ -68,7 +70,7 @@
             </div>
             <div class="txt-content">
                 <p class="txt-desc">Category</p>
-                <input class="txt-content" type="text" value="UG">
+                <input class="txt-content" id="category-input" type="text" value="UG">
             </div>
             <button class="button" id="team-btn">SAVE</button>
 
@@ -250,10 +252,14 @@
                 </div>
             </div>
             <div class="txt-content">
-                <p class="txt-desc">Product Launch</p>
+                <p class="txt-desc">Dumb Charades</p>
                 <div class="row">
-                    <input class="txt-content" id="product-mem1" type="text" placeholder="Participant-1">
-                    <input class="txt-content" id="product-mem1-con" type="text" placeholder="Contact Number">
+                    <input class="txt-content" id="dumb-mem1" type="text" placeholder="Participant-1">
+                    <input class="txt-content" id="dumb-mem1-con" type="text" placeholder="Contact Number">
+                </div>
+                <div class="row">
+                    <input class="txt-content" id="dumb-mem2" type="text" placeholder="Participant-2">
+                    <input class="txt-content" id="dumb-mem2-con" type="text" placeholder="Contact Number">
                 </div>
             </div>
 

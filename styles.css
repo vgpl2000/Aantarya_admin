@@ -42,8 +42,24 @@
 
 
 
-#body-id {
+
+/* #body-id {
   display: none;
+} */
+
+#clg-list{
+  height: 30vh;
+  overflow-y: auto;
+}
+
+.team-item-list{
+  cursor: pointer;
+  padding: 1vh 1vw;
+  
+}
+
+.team-item-list:hover{
+  color: #0a579b;
 }
 
 #pass-div {
@@ -349,7 +365,5 @@
 
 
 @media only screen and (max-width: 760px) {
-  *{
-    overflow-x: hidden;
-  }
+  
 }
