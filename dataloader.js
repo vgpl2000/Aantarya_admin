@@ -77,6 +77,9 @@ const fetchTeams = async () => {
     }
 };
 
+fetchTeams();
+
+
 const displayTeams = (teams) => {
     teamList.innerHTML = '';
 
@@ -91,8 +94,8 @@ const displayTeams = (teams) => {
         });
 };
 
-teamList.addEventListener('click', (event) => {
-    const clickedTeamId = event.target.dataset.teamId;
+teamList.addEventListener('click', async(event) => {
+    const clickedTeamId = await event.target.dataset.teamId;
     teamDetails(clickedTeamId);
     teamPayment(clickedTeamId);
     accommoNo(clickedTeamId);
@@ -115,12 +118,9 @@ const teamDetails = async (teamId) => {
 };
 
 
-fetchTeams();
-
 
 //save team details btn
 const saveBtn = document.querySelector("#team-btn");
-
 saveBtn.onclick = async (event) => {
     const teamData = getTeamData();
     const options = {
@@ -166,14 +166,30 @@ const getTeamData = () => {
 
 
 const teamPayment = async (teamId) => {
+  console.log(teamId);
 
-    const res = await fetch(`${API_URL}/team/${teamId}`);
-    const data = await res.json();
+  if (teamId) {
+      try {
+          const res = await fetch(`${API_URL}/team/${teamId}`);
+          const data = await res.json();
+          const paymentData = data.paymentStatus;
+          transChk.checked = paymentData.verificationStatus;
 
-    paymentImg.src = data.paymentStatus.screenshot;
-    transId.value = data.paymentStatus.transactionId;
-    transChk.checked = data.paymentStatus.verificationStatus ? true : false;
+          if (paymentData.verificationStatus) {
+              paymentImg.src = paymentData.screenshot;
+              transId.value = paymentData.transactionId;
+          } else {
+              transId.value = 'Payment still pending';
+              paymentImg.src = 'https://aantarya-admin-4plus1.netlify.app/assets/screenshot_sample.jpg';
+          }
+      } catch (error) {
+          console.error('Error fetching team data:', error);
+      }
+  } else {
+      console.error('Team ID is undefined.');
+  }
 };
+
 
 
 // accommodation
@@ -183,7 +199,7 @@ const accommoNo = async (teamId) => {
     const res = await fetch(`${API_URL}/team/${teamId}`);
     const data = await res.json();
 
-    if (data.accommodation !== undefined) {
+    if (data.accommodation) {
         accommocheck.value = 'Yes';
         accommonb.value = data.accommodation.countOfBoys;
         accommong.value = data.accommodation.countOfGirls;
@@ -204,7 +220,30 @@ const events = async (teamId) => {
     updateUITextFields(eventData);
 
     //coding
-  
+    // const codingData = {
+    //     name: codingMem1.value,
+    //     phone: codingMem1Con.value
+    // };
+
+    // const codingData2 = {
+    //     name: codingMem2.value,
+    //     phone: codingMem2Con.value
+    // };
+
+    // const coding = [codingData, codingData2]; 
+
+    // //web
+    // const webData = {
+    //     name: webMem1.value,
+    //     phone: webMem1Con.value
+    // };
+
+    // const webData2 = {
+    //     name: webMem2.value,
+    //     phone: webMem2Con.value
+    // };
+
+    // const web = [webData, webData2];
 
 
 
