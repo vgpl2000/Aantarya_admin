@@ -108,7 +108,7 @@ const teamDetails = async (teamId) => {
 
     teamNameInput.value = data.teamName;
     collegeNameInput.value = data.collegeName;
-    
+
     categoryInput.value = data.isUG ? 'UG' : 'PG';
 
 
@@ -118,6 +118,50 @@ const teamDetails = async (teamId) => {
 fetchTeams();
 
 
+//save team details btn
+const saveBtn = document.querySelector("#team-btn");
+
+saveBtn.onclick = async (event) => {
+    const teamData = getTeamData();
+    const options = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(teamData),
+    };
+
+    try {
+        const res = await fetch(`${API_URL}/admin/get-ids/${teamIdInput.value}`, options);
+
+        if (res.status === 200) {
+            alert("Data saved successfully");
+        } else {
+            console.error("Error saving data. Server responded with:", res.status);
+            // Log the response text for more details
+            const responseText = await res.text();
+            //alert(responseText);
+            console.error("Response Text:", responseText);
+            alert("Error saving data");
+        }
+    } catch (error) {
+        console.error("ERROR:", error);
+    }
+};
+
+
+
+const getTeamData = () => {
+    const teamData = {
+        collegeName: collegeNameInput.value,
+        teamName: teamNameInput.value,
+        isUG: categoryInput.value
+    };
+    return teamData;
+};
+
+
+
 // payment
 
 
@@ -125,10 +169,10 @@ const teamPayment = async (teamId) => {
 
     const res = await fetch(`${API_URL}/team/${teamId}`);
     const data = await res.json();
-    
+
     paymentImg.src = data.paymentStatus.screenshot;
     transId.value = data.paymentStatus.transactionId;
-    transChk.checked = data.paymentStatus.verificationStatus ? true : false ;
+    transChk.checked = data.paymentStatus.verificationStatus ? true : false;
 };
 
 
@@ -138,29 +182,261 @@ const accommoNo = async (teamId) => {
 
     const res = await fetch(`${API_URL}/team/${teamId}`);
     const data = await res.json();
-    
-    if(data.accommodation !== undefined){
+
+    if (data.accommodation !== undefined) {
         accommocheck.value = 'Yes';
-        accommonb.value= data.accommodation.countOfBoys;
-        accommong.value= data.accommodation.countOfGirls;
+        accommonb.value = data.accommodation.countOfBoys;
+        accommong.value = data.accommodation.countOfGirls;
     }
-    else{
+    else {
         accommocheck.value = 'No';
-        accommonb.value= "0";
-        accommong.value= "0";
+        accommonb.value = "0";
+        accommong.value = "0";
     }
 };
 
 
 // events
 const events = async (teamId) => {
-
-    const res = await fetch(`${API_URL}/team/${teamId}/events`);
+    const eventData = new EventData(data);
+    const res = await fetch(`${API_URL}/team/${teamId}`);
     const data = await res.json();
+    updateUITextFields(eventData);
 
-    
-    
+    //coding
+  
 
 
-    
+
 };
+
+const updateUITextFields = (eventData) => {
+    // codingMemCon1.value = 'N/A'
+    // codingMem1.placeholder = 'input placeholder'
+  
+    let codingData = eventData.getCoding();
+  
+    if (codingData && codingData.length == 2) {
+      codingMem1.value = codingData[0].name;
+      codingMem1Con.value = codingData[0].phone;
+  
+      codingMem2.value = codingData[1].name;
+      codingMem2Con.value = codingData[1].phone;
+    }
+  
+    let webData = eventData.getWeb();
+    if (webData && webData.length == 2) {
+      webMem1.value = eventData.getWeb()[0].name;
+      webMem1Con.value = eventData.getWeb()[0].phone;
+  
+      webMem2.value = eventData.getWeb()[1].name;
+      webMem2Con.value = eventData.getWeb()[1].phone;
+    }
+  
+    let quizData = eventData.getQuiz();
+    if (quizData && quizData.length == 2) {
+      quizMem1.value = eventData.getQuiz()[0].name;
+      quizMem1Con.value = eventData.getQuiz()[0].phone;
+  
+      quizMem2.value = eventData.getQuiz()[1].name;
+      quizMem2Con.value = eventData.getQuiz()[1].phone;
+    }
+  
+    let debateData = eventData.getDebate();
+    if (debateData) {
+      debateMem1.value = eventData.getDebate().name;
+      debateMem1Con.value = eventData.getDebate().phone;
+    }
+  
+    let danceData = eventData.getDance();
+  
+    if (danceData && danceData.length > 1) {
+      danceMem1.value = "N/A";
+      danceMem1Con.value = "N/A";
+  
+      danceMem2.value = "N/A";
+      danceMem2Con.value = "N/A";
+  
+      danceMem3.value = "N/A";
+      danceMem3Con.value = "N/A";
+  
+      danceMem4.value = "N/A";
+      danceMem4Con.value = "N/A";
+  
+      danceMem5.value = "N/A";
+      danceMem5Con.value = "N/A";
+  
+      danceMem6.value = "N/A";
+      danceMem6Con.value = "N/A";
+  
+      danceMem7.value = "N/A";
+      danceMem7Con.value = "N/A";
+  
+      const danceMembers = [
+        { name: danceMem1, phone: danceMem1Con },
+        { name: danceMem2, phone: danceMem2Con },
+        { name: danceMem3, phone: danceMem3Con },
+        { name: danceMem4, phone: danceMem4Con },
+        { name: danceMem5, phone: danceMem5Con },
+        { name: danceMem6, phone: danceMem6Con },
+        { name: danceMem7, phone: danceMem7Con },
+      ];
+  
+      const danceData = eventData.getDance();
+  
+      danceMembers.forEach((member, index) => {
+        if (danceData[index]) {
+          member.name.value = danceData[index].name;
+          member.phone.value = danceData[index].phone;
+        }
+      });
+    }
+  
+    let photographyData = eventData.getPhotography();
+    if (photographyData) {
+      photoMem1.value = eventData.getPhotography().name;
+      photoMem1Con.value = eventData.getPhotography().phone;
+    }
+  
+    let gamingData = eventData.getGaming();
+    if (gamingData && gamingData.length == 2) {
+      gameMem1.value = eventData.getGaming()[0].name;
+      gameMem1Con.value = eventData.getGaming()[0].phone;
+  
+      gameMem2.value = eventData.getGaming()[1].name;
+      gameMem2Con.value = eventData.getGaming()[1].phone;
+    }
+  
+    let treasureData = eventData.getTreasure();
+    if (treasureData && treasureData.length == 2) {
+      thuntMem1.value = eventData.getTreasure()[0].name;
+      thuntMem1Con.value = eventData.getTreasure()[0].phone;
+  
+      thuntMem2.value = eventData.getTreasure()[1].name;
+      thuntMem2Con.value = eventData.getTreasure()[1].phone;
+    }
+  
+    let productData = eventData.getProductLaunch();
+    if (productData) {
+      productMem1.value = eventData.getProductLaunch().name;
+      productMem1Con.value = eventData.getProductLaunch().phone;
+    }
+  
+    let dumbCharadesData = eventData.getDumbCharades();
+    if (dumbCharadesData && dumbCharadesData.length == 2) {
+      dumbMem1.value = eventData.getDumbCharades()[0].name;
+      dumbMem1Con.value = eventData.getDumbCharades()[0].phone;
+  
+      dumbMem2.value = eventData.getDumbCharades()[1].name;
+      dumbMem2Con.value = eventData.getDumbCharades()[1].phone;
+    }
+  
+    let itManagerData = eventData.getITManager();
+  
+    if (itManagerData) {
+      itmanMem1.value = eventData.getITManager().name;
+      itmanMem1Con.value = eventData.getITManager().phone;
+    }
+  
+    let designingData = eventData.getDesigning();
+    if (designingData) {
+      desigMem1.value = eventData.getDesigning().name;
+      desigMem1Con.value = eventData.getDesigning().phone;
+    }
+  };
+
+  class EventData {
+    constructor(data) {
+      this.data = data || {};
+    }
+  
+    static repeatObject(object, size) {
+      return Array.from({ length: size }, () => ({ ...object }));
+    }
+  
+    getITManager() {
+      return this.data.events && this.data.events.itManager
+        ? this.data.events.itManager
+        : { name: "N/A", phone: "N/A" };
+    }
+  
+    getPhotography() {
+      return this.data.events && this.data.events.photography
+        ? this.data.events.photography
+        : { name: "N/A", phone: "N/A" };
+    }
+  
+    getProductLaunch() {
+      return this.data.events && this.data.events.productLaunch
+        ? this.data.events.productLaunch
+        : { name: "N/A", phone: "N/A" };
+    }
+  
+    getDesigning() {
+      return this.data.events && this.data.events.designing
+        ? this.data.events.designing
+        : { name: "N/A", phone: "N/A" };
+    }
+  
+    getCoding() {
+      return this.data.events &&
+        this.data.events.coding &&
+        this.data.events.coding.length == 2
+        ? this.data.events.coding
+        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+    }
+  
+    getWeb() {
+      return this.data.events &&
+        this.data.events.web &&
+        this.data.events.web.length == 2
+        ? this.data.events.web
+        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+    }
+  
+    getQuiz() {
+      return this.data.events &&
+        this.data.events.quiz &&
+        this.data.events.quiz.length == 2
+        ? this.data.events.quiz
+        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+    }
+  
+    getDebate() {
+      return this.data.events && this.data.events.debate
+        ? this.data.events.debate
+        : { name: "N/A", phone: "N/A" };
+    }
+  
+    getDance() {
+      return this.data.events &&
+        this.data.events.dance &&
+        this.data.events.dance.length > 1
+        ? this.data.events.dance
+        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 7);
+    }
+  
+    getGaming() {
+      return this.data.events &&
+        this.data.events.gaming &&
+        this.data.events.gaming.length == 2
+        ? this.data.events.gaming
+        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+    }
+  
+    getTreasure() {
+      return this.data.events &&
+        this.data.events.treasure &&
+        this.data.events.treasure.length == 2
+        ? this.data.events.treasure
+        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+    }
+  
+    getDumbCharades() {
+      return this.data.events &&
+        this.data.events.dumbCharades &&
+        this.data.events.dumbCharades.length == 2
+        ? this.data.events.dumbCharades
+        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+    }
+  }
