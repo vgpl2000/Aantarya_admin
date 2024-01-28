@@ -92,14 +92,20 @@ const displayTeams = (teams) => {
             listItem.classList.add('team-item-list');
             teamList.appendChild(listItem);
         });
+
+        updateUI(teams[0]._id);
 };
 
 teamList.addEventListener('click', async(event) => {
     const clickedTeamId = await event.target.dataset.teamId;
-    teamDetails(clickedTeamId);
-    teamPayment(clickedTeamId);
-    accommoNo(clickedTeamId);
+    updateUI(clickedTeamId);
 });
+
+const updateUI = async (teamId) => {
+    teamDetails(teamId);
+    teamPayment(teamId);
+    accommoNo(teamId);
+}
 
 
 const teamDetails = async (teamId) => {
@@ -165,6 +171,7 @@ const getTeamData = () => {
 // payment
 
 
+const savePaymentBtn = document.querySelector("#payment-btn");
 const teamPayment = async (teamId) => {
   console.log(teamId);
 
@@ -175,12 +182,25 @@ const teamPayment = async (teamId) => {
           const paymentData = data.paymentStatus;
           transChk.checked = paymentData.verificationStatus;
 
+          if(paymentData.screenshot){
+            paymentImg.style.display = 'block';
+            paymentImg.src = paymentData.screenshot
+          }
+          else{
+            paymentImg.style.display = 'none';
+          }
+
+          if(paymentData.transactionId){
+            transId.value = paymentData.transactionId;
+          }
+          
           if (paymentData.verificationStatus) {
-              paymentImg.src = paymentData.screenshot;
-              transId.value = paymentData.transactionId;
+            transChk.disabled = true;
+            savePaymentBtn.disabled = true;
           } else {
-              transId.value = 'Payment still pending';
-              paymentImg.src = 'https://aantarya-admin-4plus1.netlify.app/assets/screenshot_sample.jpg';
+            transId.value = 'Payment still pending';
+            transChk.disabled = false;
+            savePaymentBtn.disabled = false;
           }
       } catch (error) {
           console.error('Error fetching team data:', error);
@@ -190,6 +210,42 @@ const teamPayment = async (teamId) => {
   }
 };
 
+savePaymentBtn.onclick = async (event) => {
+
+  const paymentData = {
+    paymentStatus: {
+        verificationStatus: transChk.checked
+    }
+};
+  const options = {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(paymentData),
+  };
+
+  console.log(paymentData);
+
+  try {
+      const res = await fetch(`${API_URL}/admin/update-team-status/${teamIdInput.value}`, options);
+
+      if (res.status === 200) {
+          return alert("Data saved successfully");
+      } 
+      else if(res.status == 400){
+        return alert(res.message);
+      }
+      else {
+          console.error("Error saving data. Server responded with:", res.status);
+          // Log the response text for more details
+          const responseText = await res.json();
+          console.error("Response Text:", responseText);
+      }
+  } catch (error) {
+      console.error("ERROR:", error);
+  }
+};
 
 
 // accommodation
