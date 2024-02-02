@@ -18,53 +18,68 @@ const accommong = document.getElementById("accommo-no-g");
 
 
 const codingMem1 = document.getElementById('coding-mem1');
-const codingMem1Con = document.getElementById('coding-mem1-con');
+const codingMemCon1 = document.getElementById('coding-mem1-con');
 const codingMem2 = document.getElementById('coding-mem2');
-const codingMem2Con = document.getElementById('coding-mem2-con');
+const codingMemCon2 = document.getElementById('coding-mem2-con');
+
+
 const webMem1 = document.getElementById('web-mem1');
-const webMem1Con = document.getElementById('web-mem1-con');
+const webMemCon1 = document.getElementById('web-mem1-con');
 const webMem2 = document.getElementById('web-mem2');
-const webMem2Con = document.getElementById('web-mem2-con');
+const webMemCon2 = document.getElementById('web-mem2-con');
+
+
 const quizMem1 = document.getElementById('quiz-mem1');
-const quizMem1Con = document.getElementById('quiz-mem1-con');
+const quizMemCon1 = document.getElementById('quiz-mem1-con');
 const quizMem2 = document.getElementById('quiz-mem2');
-const quizMem2Con = document.getElementById('quiz-mem2-con');
+const quizMemCon2 = document.getElementById('quiz-mem2-con');
+
+
 const debateMem1 = document.getElementById('debate-mem1');
-const debateMem1Con = document.getElementById('debate-mem1-con');
+const debateMemCon1 = document.getElementById('debate-mem1-con');
+
 const danceMem1 = document.getElementById('dance-mem1');
-const danceMem1Con = document.getElementById('dance-mem1-con');
+const danceMemCon1 = document.getElementById('dance-mem1-con');
 const danceMem2 = document.getElementById('dance-mem2');
-const danceMem2Con = document.getElementById('dance-mem2-con');
+const danceMemCon2 = document.getElementById('dance-mem2-con');
 const danceMem3 = document.getElementById('dance-mem3');
-const danceMem3Con = document.getElementById('dance-mem3-con');
+const danceMemCon3 = document.getElementById('dance-mem3-con');
 const danceMem4 = document.getElementById('dance-mem4');
-const danceMem4Con = document.getElementById('dance-mem4-con');
+const danceMemCon4 = document.getElementById('dance-mem4-con');
 const danceMem5 = document.getElementById('dance-mem5');
-const danceMem5Con = document.getElementById('dance-mem5-con');
+const danceMemCon5 = document.getElementById('dance-mem5-con');
 const danceMem6 = document.getElementById('dance-mem6');
-const danceMem6Con = document.getElementById('dance-mem6-con');
+const danceMemCon6 = document.getElementById('dance-mem6-con');
 const danceMem7 = document.getElementById('dance-mem7');
-const danceMem7Con = document.getElementById('dance-mem7-con');
-const photoMem1 = document.getElementById('photo-mem1');
-const photoMem1Con = document.getElementById('photo-mem1-con');
-const gameMem1 = document.getElementById('game-mem1');
-const gameMem1Con = document.getElementById('game-mem1-con');
-const gameMem2 = document.getElementById('game-mem2');
-const gameMem2Con = document.getElementById('game-mem2-con');
-const thuntMem1 = document.getElementById('thunt-mem1');
-const thuntMem1Con = document.getElementById('thunt-mem1-con');
-const thuntMem2 = document.getElementById('thunt-mem2');
-const thuntMem2Con = document.getElementById('thunt-mem2-con');
+const danceMemCon7 = document.getElementById('dance-mem7-con');
+
+
+const photographyMem1 = document.getElementById('photo-mem1');
+const photographyMemCon1 = document.getElementById('photo-mem1-con');
+
+const gamingMem1 = document.getElementById('game-mem1');
+const gamingMemCon1 = document.getElementById('game-mem1-con');
+const gamingMem2 = document.getElementById('game-mem2');
+const gamingMemCon2 = document.getElementById('game-mem2-con');
+
+const treasureMem1 = document.getElementById('thunt-mem1');
+const treasureMemCon1 = document.getElementById('thunt-mem1-con');
+const treasureMem2 = document.getElementById('thunt-mem2');
+const treasureMemCon2 = document.getElementById('thunt-mem2-con');
+
 const productMem1 = document.getElementById('product-mem1');
-const productMem1Con = document.getElementById('product-mem1-con');
-const itmanMem1 = document.getElementById('itman-mem1');
-const itmanMem1Con = document.getElementById('itman-mem1-con');
-const desigMem1 = document.getElementById('desig-mem1');
-const desigMem1Con = document.getElementById('desig-mem1-con');
-const dumbMem1 = document.getElementById('dumb-mem1');
-const dumbMem1Con = document.getElementById('dumb-mem1-con');
-const dumbMem2 = document.getElementById('dumb-mem2');
-const dumbMem2Con = document.getElementById('dumb-mem2-con');
+const productMemCon1 = document.getElementById('product-mem1-con');
+
+const itManagerMem1 = document.getElementById('itman-mem1');
+const itManagerMemCon1 = document.getElementById('itman-mem1-con');
+
+const designingMem1 = document.getElementById('desig-mem1');
+const designingMemCon1 = document.getElementById('desig-mem1-con');
+
+const dumbchMem1 = document.getElementById('dumb-mem1');
+const dumbchMemCon1 = document.getElementById('dumb-mem1-con');
+const dumbchMem2 = document.getElementById('dumb-mem2');
+const dumbchMemCon2 = document.getElementById('dumb-mem2-con');
 
 
 const fetchTeams = async () => {
@@ -105,6 +120,7 @@ const updateUI = async (teamId) => {
     teamDetails(teamId);
     teamPayment(teamId);
     accommoNo(teamId);
+    fetchDataAndUpdateUI(teamId);
 }
 
 
@@ -167,7 +183,21 @@ const getTeamData = () => {
 };
 
 
+const dumbCharadesSection = document.querySelector(".ug-hide");
+const itManagerSection = document.querySelector(".pg-hide1");
+const designSection = document.querySelector(".pg-hide2");
 
+const displayUGFields = () => {
+  dumbCharadesSection.classList.remove("hide");
+  itManagerSection.classList.add("hide");
+  designSection.classList.add("hide");
+};
+
+const displayPGFields = () => {
+  dumbCharadesSection.classList.add("hide");
+  itManagerSection.classList.remove("hide");
+  designSection.classList.remove("hide");
+};
 // payment
 
 
@@ -275,263 +305,368 @@ const events = async (teamId) => {
     const data = await res.json();
     updateUITextFields(eventData);
 
-    //coding
-    // const codingData = {
-    //     name: codingMem1.value,
-    //     phone: codingMem1Con.value
-    // };
-
-    // const codingData2 = {
-    //     name: codingMem2.value,
-    //     phone: codingMem2Con.value
-    // };
-
-    // const coding = [codingData, codingData2]; 
-
-    // //web
-    // const webData = {
-    //     name: webMem1.value,
-    //     phone: webMem1Con.value
-    // };
-
-    // const webData2 = {
-    //     name: webMem2.value,
-    //     phone: webMem2Con.value
-    // };
-
-    // const web = [webData, webData2];
-
-
-
 };
 
+
+class EventData {
+  constructor(data) {
+    this.data = data || {};
+  }
+
+  static repeatObject(object, size) {
+    return Array.from({ length: size }, () => ({ ...object }));
+  }
+
+  getITManager() {
+    return this.data.events && this.data.events.itManager
+      ? this.data.events.itManager
+      : { name: "N/A", phone: "N/A" };
+  }
+
+  getPhotography() {
+    return this.data.events && this.data.events.photography
+      ? this.data.events.photography
+      : { name: "N/A", phone: "N/A" };
+  }
+
+  getProductLaunch() {
+    return this.data.events && this.data.events.productLaunch
+      ? this.data.events.productLaunch
+      : { name: "N/A", phone: "N/A" };
+  }
+
+  getDesigning() {
+    return this.data.events && this.data.events.designing
+      ? this.data.events.designing
+      : { name: "N/A", phone: "N/A" };
+  }
+
+  getCoding() {
+    return this.data.events &&
+      this.data.events.coding &&
+      this.data.events.coding.length == 2
+      ? this.data.events.coding
+      : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+  }
+
+  getWeb() {
+    return this.data.events &&
+      this.data.events.web &&
+      this.data.events.web.length == 2
+      ? this.data.events.web
+      : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+  }
+
+  getQuiz() {
+    return this.data.events &&
+      this.data.events.quiz &&
+      this.data.events.quiz.length == 2
+      ? this.data.events.quiz
+      : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+  }
+
+  getDebate() {
+    return this.data.events && this.data.events.debate
+      ? this.data.events.debate
+      : { name: "N/A", phone: "N/A" };
+  }
+
+  getDance() {
+    return this.data.events &&
+      this.data.events.dance &&
+      this.data.events.dance.length > 1
+      ? this.data.events.dance
+      : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 7);
+  }
+
+  getGaming() {
+    return this.data.events &&
+      this.data.events.gaming &&
+      this.data.events.gaming.length == 2
+      ? this.data.events.gaming
+      : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+  }
+
+  getTreasure() {
+    return this.data.events &&
+      this.data.events.treasure &&
+      this.data.events.treasure.length == 2
+      ? this.data.events.treasure
+      : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+  }
+
+  getDumbCharades() {
+    return this.data.events &&
+      this.data.events.dumbCharades &&
+      this.data.events.dumbCharades.length == 2
+      ? this.data.events.dumbCharades
+      : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
+  }
+}
+
 const updateUITextFields = (eventData) => {
-    // codingMemCon1.value = 'N/A'
-    // codingMem1.placeholder = 'input placeholder'
-  
-    let codingData = eventData.getCoding();
-  
-    if (codingData && codingData.length == 2) {
-      codingMem1.value = codingData[0].name;
-      codingMem1Con.value = codingData[0].phone;
-  
-      codingMem2.value = codingData[1].name;
-      codingMem2Con.value = codingData[1].phone;
-    }
-  
-    let webData = eventData.getWeb();
-    if (webData && webData.length == 2) {
-      webMem1.value = eventData.getWeb()[0].name;
-      webMem1Con.value = eventData.getWeb()[0].phone;
-  
-      webMem2.value = eventData.getWeb()[1].name;
-      webMem2Con.value = eventData.getWeb()[1].phone;
-    }
-  
-    let quizData = eventData.getQuiz();
-    if (quizData && quizData.length == 2) {
-      quizMem1.value = eventData.getQuiz()[0].name;
-      quizMem1Con.value = eventData.getQuiz()[0].phone;
-  
-      quizMem2.value = eventData.getQuiz()[1].name;
-      quizMem2Con.value = eventData.getQuiz()[1].phone;
-    }
-  
-    let debateData = eventData.getDebate();
-    if (debateData) {
-      debateMem1.value = eventData.getDebate().name;
-      debateMem1Con.value = eventData.getDebate().phone;
-    }
-  
-    let danceData = eventData.getDance();
-  
-    if (danceData && danceData.length > 1) {
-      danceMem1.value = "N/A";
-      danceMem1Con.value = "N/A";
-  
-      danceMem2.value = "N/A";
-      danceMem2Con.value = "N/A";
-  
-      danceMem3.value = "N/A";
-      danceMem3Con.value = "N/A";
-  
-      danceMem4.value = "N/A";
-      danceMem4Con.value = "N/A";
-  
-      danceMem5.value = "N/A";
-      danceMem5Con.value = "N/A";
-  
-      danceMem6.value = "N/A";
-      danceMem6Con.value = "N/A";
-  
-      danceMem7.value = "N/A";
-      danceMem7Con.value = "N/A";
-  
-      const danceMembers = [
-        { name: danceMem1, phone: danceMem1Con },
-        { name: danceMem2, phone: danceMem2Con },
-        { name: danceMem3, phone: danceMem3Con },
-        { name: danceMem4, phone: danceMem4Con },
-        { name: danceMem5, phone: danceMem5Con },
-        { name: danceMem6, phone: danceMem6Con },
-        { name: danceMem7, phone: danceMem7Con },
-      ];
-  
-      const danceData = eventData.getDance();
-  
-      danceMembers.forEach((member, index) => {
-        if (danceData[index]) {
-          member.name.value = danceData[index].name;
-          member.phone.value = danceData[index].phone;
-        }
-      });
-    }
-  
-    let photographyData = eventData.getPhotography();
-    if (photographyData) {
-      photoMem1.value = eventData.getPhotography().name;
-      photoMem1Con.value = eventData.getPhotography().phone;
-    }
-  
-    let gamingData = eventData.getGaming();
-    if (gamingData && gamingData.length == 2) {
-      gameMem1.value = eventData.getGaming()[0].name;
-      gameMem1Con.value = eventData.getGaming()[0].phone;
-  
-      gameMem2.value = eventData.getGaming()[1].name;
-      gameMem2Con.value = eventData.getGaming()[1].phone;
-    }
-  
-    let treasureData = eventData.getTreasure();
-    if (treasureData && treasureData.length == 2) {
-      thuntMem1.value = eventData.getTreasure()[0].name;
-      thuntMem1Con.value = eventData.getTreasure()[0].phone;
-  
-      thuntMem2.value = eventData.getTreasure()[1].name;
-      thuntMem2Con.value = eventData.getTreasure()[1].phone;
-    }
-  
-    let productData = eventData.getProductLaunch();
-    if (productData) {
-      productMem1.value = eventData.getProductLaunch().name;
-      productMem1Con.value = eventData.getProductLaunch().phone;
-    }
-  
-    let dumbCharadesData = eventData.getDumbCharades();
-    if (dumbCharadesData && dumbCharadesData.length == 2) {
-      dumbMem1.value = eventData.getDumbCharades()[0].name;
-      dumbMem1Con.value = eventData.getDumbCharades()[0].phone;
-  
-      dumbMem2.value = eventData.getDumbCharades()[1].name;
-      dumbMem2Con.value = eventData.getDumbCharades()[1].phone;
-    }
-  
-    let itManagerData = eventData.getITManager();
-  
-    if (itManagerData) {
-      itmanMem1.value = eventData.getITManager().name;
-      itmanMem1Con.value = eventData.getITManager().phone;
-    }
-  
-    let designingData = eventData.getDesigning();
-    if (designingData) {
-      desigMem1.value = eventData.getDesigning().name;
-      desigMem1Con.value = eventData.getDesigning().phone;
-    }
+  // codingMemCon1.value = 'N/A'
+  // codingMem1.placeholder = 'input placeholder'
+
+  let codingData = eventData.getCoding();
+
+  if (codingData && codingData.length == 2) {
+    codingMem1.value = codingData[0].name;
+    codingMemCon1.value = codingData[0].phone;
+
+    codingMem2.value = codingData[1].name;
+    codingMemCon2.value = codingData[1].phone;
+  }
+
+  let webData = eventData.getWeb();
+  if (webData && webData.length == 2) {
+    webMem1.value = eventData.getWeb()[0].name;
+    webMemCon1.value = eventData.getWeb()[0].phone;
+
+    webMem2.value = eventData.getWeb()[1].name;
+    webMemCon2.value = eventData.getWeb()[1].phone;
+  }
+
+  let quizData = eventData.getQuiz();
+  if (quizData && quizData.length == 2) {
+    quizMem1.value = eventData.getQuiz()[0].name;
+    quizMemCon1.value = eventData.getQuiz()[0].phone;
+
+    quizMem2.value = eventData.getQuiz()[1].name;
+    quizMemCon2.value = eventData.getQuiz()[1].phone;
+  }
+
+  let debateData = eventData.getDebate();
+  if (debateData) {
+    debateMem1.value = eventData.getDebate().name;
+    debateMemCon1.value = eventData.getDebate().phone;
+  }
+
+  let danceData = eventData.getDance();
+
+  if (danceData && danceData.length > 1) {
+    danceMem1.value = "N/A";
+    danceMemCon1.value = "N/A";
+
+    danceMem2.value = "N/A";
+    danceMemCon2.value = "N/A";
+
+    danceMem3.value = "N/A";
+    danceMemCon3.value = "N/A";
+
+    danceMem4.value = "N/A";
+    danceMemCon4.value = "N/A";
+
+    danceMem5.value = "N/A";
+    danceMemCon5.value = "N/A";
+
+    danceMem6.value = "N/A";
+    danceMemCon6.value = "N/A";
+
+    danceMem7.value = "N/A";
+    danceMemCon7.value = "N/A";
+
+    const danceMembers = [
+      { name: danceMem1, phone: danceMemCon1 },
+      { name: danceMem2, phone: danceMemCon2 },
+      { name: danceMem3, phone: danceMemCon3 },
+      { name: danceMem4, phone: danceMemCon4 },
+      { name: danceMem5, phone: danceMemCon5 },
+      { name: danceMem6, phone: danceMemCon6 },
+      { name: danceMem7, phone: danceMemCon7 },
+    ];
+
+    const danceData = eventData.getDance();
+
+    danceMembers.forEach((member, index) => {
+      if (danceData[index]) {
+        member.name.value = danceData[index].name;
+        member.phone.value = danceData[index].phone;
+      }
+    });
+  }
+
+  let photographyData = eventData.getPhotography();
+  if (photographyData) {
+    photographyMem1.value = eventData.getPhotography().name;
+    photographyMemCon1.value = eventData.getPhotography().phone;
+  }
+
+  let gamingData = eventData.getGaming();
+  if (gamingData && gamingData.length == 2) {
+    gamingMem1.value = eventData.getGaming()[0].name;
+    gamingMemCon1.value = eventData.getGaming()[0].phone;
+
+    gamingMem2.value = eventData.getGaming()[1].name;
+    gamingMemCon2.value = eventData.getGaming()[1].phone;
+  }
+
+  let treasureData = eventData.getTreasure();
+  if (treasureData && treasureData.length == 2) {
+    treasureMem1.value = eventData.getTreasure()[0].name;
+    treasureMemCon1.value = eventData.getTreasure()[0].phone;
+
+    treasureMem2.value = eventData.getTreasure()[1].name;
+    treasureMemCon2.value = eventData.getTreasure()[1].phone;
+  }
+
+  let productData = eventData.getProductLaunch();
+  if (productData) {
+    productMem1.value = eventData.getProductLaunch().name;
+    productMemCon1.value = eventData.getProductLaunch().phone;
+  }
+
+  let dumbCharadesData = eventData.getDumbCharades();
+  if (dumbCharadesData && dumbCharadesData.length == 2) {
+    dumbchMem1.value = eventData.getDumbCharades()[0].name;
+    dumbchMemCon1.value = eventData.getDumbCharades()[0].phone;
+
+    dumbchMem2.value = eventData.getDumbCharades()[1].name;
+    dumbchMemCon2.value = eventData.getDumbCharades()[1].phone;
+  }
+
+  let itManagerData = eventData.getITManager();
+
+  if (itManagerData) {
+    itManagerMem1.value = eventData.getITManager().name;
+    itManagerMemCon1.value = eventData.getITManager().phone;
+  }
+
+  let designingData = eventData.getDesigning();
+  if (designingData) {
+    designingMem1.value = eventData.getDesigning().name;
+    designingMemCon1.value = eventData.getDesigning().phone;
+  }
+};
+
+
+const fetchData = async (teamId) => {
+  try {
+    const response = await fetch(`${API_URL}/team/${teamId}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+
+
+
+const fetchDataAndUpdateUI = async (teamId) => {
+  const data = await fetchData(teamId);
+  const eventData = new EventData(data);
+
+  const isUG = data.isUG;
+
+  if (isUG) {
+    displayUGFields();
+  } else {
+    displayPGFields();
+  }
+
+  updateUITextFields(eventData);
+};
+
+
+
+const getEventData = () => {
+  const codingData = [
+    { name: codingMem1.value, phone: codingMemCon1.value },
+    { name: codingMem2.value, phone: codingMemCon2.value },
+  ];
+
+  const webData = [
+    { name: webMem1.value, phone: webMemCon1.value },
+    { name: webMem2.value, phone: webMemCon2.value },
+  ];
+
+  const quizData = [
+    { name: quizMem1.value, phone: quizMemCon1.value },
+    { name: quizMem2.value, phone: quizMemCon2.value },
+  ];
+
+  const danceData = [
+    { name: danceMem1.value, phone: danceMemCon1.value },
+    { name: danceMem2.value, phone: danceMemCon2.value },
+    { name: danceMem3.value, phone: danceMemCon3.value },
+    { name: danceMem4.value, phone: danceMemCon4.value },
+    { name: danceMem5.value, phone: danceMemCon5.value },
+    { name: danceMem6.value, phone: danceMemCon6.value },
+    { name: danceMem7.value, phone: danceMemCon7.value },
+  ];
+
+  const gamingData = [
+    { name: gamingMem1.value, phone: gamingMemCon1.value },
+    { name: gamingMem2.value, phone: gamingMemCon2.value },
+  ];
+
+  const treasureData = [
+    { name: treasureMem1.value, phone: treasureMemCon1.value },
+    { name: treasureMem2.value, phone: treasureMemCon2.value },
+  ];
+
+  const dumbCharadesData = [
+    { name: dumbchMem1.value, phone: dumbchMemCon1.value },
+    { name: dumbchMem2.value, phone: dumbchMemCon2.value },
+  ];
+
+  const eventData = {
+    events: {
+      coding: codingData,
+      web: webData,
+      quiz: quizData,
+      dance: danceData,
+      gaming: gamingData,
+      treasure: treasureData,
+      dumbCharades: dumbCharadesData,
+      itManager: { name: itManagerMem1.value, phone: itManagerMemCon1.value },
+      photography: {
+        name: photographyMem1.value,
+        phone: photographyMemCon1.value,
+      },
+      productLaunch: { name: productMem1.value, phone: productMemCon1.value },
+      designing: { name: designingMem1.value, phone: designingMemCon1.value },
+      debate: { name: debateMem1.value, phone: debateMemCon1.value },
+    },
   };
 
-  class EventData {
-    constructor(data) {
-      this.data = data || {};
+  return eventData;
+};
+
+
+
+const eventSaveBtn = document.querySelector("#events-btn");
+
+eventSaveBtn.onclick = async () => {
+  if (checkValidation() == true) {
+    loader.style.display = "block";
+    const eventData = getEventData();
+
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(eventData),
+    };
+
+    try {
+      const res = await fetch(`${API_URL}/team/${teamId}`, options);
+
+      if (res.status === 200) {
+        openAlert("Data saved successfully");
+      } else {
+        openAlert("Error saving data");
+      }
+    } catch (error) {
+      console.error("ERROR: " + error);
     }
-  
-    static repeatObject(object, size) {
-      return Array.from({ length: size }, () => ({ ...object }));
-    }
-  
-    getITManager() {
-      return this.data.events && this.data.events.itManager
-        ? this.data.events.itManager
-        : { name: "N/A", phone: "N/A" };
-    }
-  
-    getPhotography() {
-      return this.data.events && this.data.events.photography
-        ? this.data.events.photography
-        : { name: "N/A", phone: "N/A" };
-    }
-  
-    getProductLaunch() {
-      return this.data.events && this.data.events.productLaunch
-        ? this.data.events.productLaunch
-        : { name: "N/A", phone: "N/A" };
-    }
-  
-    getDesigning() {
-      return this.data.events && this.data.events.designing
-        ? this.data.events.designing
-        : { name: "N/A", phone: "N/A" };
-    }
-  
-    getCoding() {
-      return this.data.events &&
-        this.data.events.coding &&
-        this.data.events.coding.length == 2
-        ? this.data.events.coding
-        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
-    }
-  
-    getWeb() {
-      return this.data.events &&
-        this.data.events.web &&
-        this.data.events.web.length == 2
-        ? this.data.events.web
-        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
-    }
-  
-    getQuiz() {
-      return this.data.events &&
-        this.data.events.quiz &&
-        this.data.events.quiz.length == 2
-        ? this.data.events.quiz
-        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
-    }
-  
-    getDebate() {
-      return this.data.events && this.data.events.debate
-        ? this.data.events.debate
-        : { name: "N/A", phone: "N/A" };
-    }
-  
-    getDance() {
-      return this.data.events &&
-        this.data.events.dance &&
-        this.data.events.dance.length > 1
-        ? this.data.events.dance
-        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 7);
-    }
-  
-    getGaming() {
-      return this.data.events &&
-        this.data.events.gaming &&
-        this.data.events.gaming.length == 2
-        ? this.data.events.gaming
-        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
-    }
-  
-    getTreasure() {
-      return this.data.events &&
-        this.data.events.treasure &&
-        this.data.events.treasure.length == 2
-        ? this.data.events.treasure
-        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
-    }
-  
-    getDumbCharades() {
-      return this.data.events &&
-        this.data.events.dumbCharades &&
-        this.data.events.dumbCharades.length == 2
-        ? this.data.events.dumbCharades
-        : EventData.repeatObject({ name: "N/A", phone: "N/A" }, 2);
-    }
+    loader.style.display = "none";
   }
+};
+
+
+
+
+
