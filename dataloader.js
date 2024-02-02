@@ -81,60 +81,62 @@ const dumbchMemCon1 = document.getElementById('dumb-mem1-con');
 const dumbchMem2 = document.getElementById('dumb-mem2');
 const dumbchMemCon2 = document.getElementById('dumb-mem2-con');
 
+const loader = document.getElementById("loader-lottie-div");
+
 
 const fetchTeams = async () => {
-    try {
-        const response = await fetch(`${API_URL}/admin/get-ids`);
-        const teams = await response.json();
-        displayTeams(teams);
-    } catch (error) {
-        console.error('Error fetching teams:', error);
-    }
+  try {
+    const response = await fetch(`${API_URL}/admin/get-ids`);
+    const teams = await response.json();
+    displayTeams(teams);
+  } catch (error) {
+    console.error('Error fetching teams:', error);
+  }
 };
 
 fetchTeams();
 
 
 const displayTeams = (teams) => {
-    teamList.innerHTML = '';
+  teamList.innerHTML = '';
 
-    teams
-        .sort((a, b) => a.teamName.localeCompare(b.teamName))
-        .forEach(team => {
-            const listItem = document.createElement('li');
-            listItem.textContent = team.teamName;
-            listItem.dataset.teamId = team._id;
-            listItem.classList.add('team-item-list');
-            teamList.appendChild(listItem);
-        });
+  teams
+    .sort((a, b) => a.teamName.localeCompare(b.teamName))
+    .forEach(team => {
+      const listItem = document.createElement('li');
+      listItem.textContent = team.teamName;
+      listItem.dataset.teamId = team._id;
+      listItem.classList.add('team-item-list');
+      teamList.appendChild(listItem);
+    });
 
-        updateUI(teams[0]._id);
+  updateUI(teams[0]._id);
 };
 
-teamList.addEventListener('click', async(event) => {
-    const clickedTeamId = await event.target.dataset.teamId;
-    updateUI(clickedTeamId);
+teamList.addEventListener('click', async (event) => {
+  const clickedTeamId = await event.target.dataset.teamId;
+  updateUI(clickedTeamId);
 });
 
 const updateUI = async (teamId) => {
-    teamDetails(teamId);
-    teamPayment(teamId);
-    accommoNo(teamId);
-    fetchDataAndUpdateUI(teamId);
+  teamDetails(teamId);
+  teamPayment(teamId);
+  accommoNo(teamId);
+  fetchDataAndUpdateUI(teamId);
 }
 
 
 const teamDetails = async (teamId) => {
 
-    teamIdInput.value = teamId;
+  teamIdInput.value = teamId;
 
-    const res = await fetch(`${API_URL}/admin/get-ids/${teamId}`);
-    const data = await res.json();
+  const res = await fetch(`${API_URL}/admin/get-ids/${teamId}`);
+  const data = await res.json();
 
-    teamNameInput.value = data.teamName;
-    collegeNameInput.value = data.collegeName;
+  teamNameInput.value = data.teamName;
+  collegeNameInput.value = data.collegeName;
 
-    categoryInput.value = data.isUG ? 'UG' : 'PG';
+  categoryInput.value = data.isUG ? 'UG' : 'PG';
 
 
 };
@@ -144,42 +146,42 @@ const teamDetails = async (teamId) => {
 //save team details btn
 const saveBtn = document.querySelector("#team-btn");
 saveBtn.onclick = async (event) => {
-    const teamData = getTeamData();
-    const options = {
-        method: "PUT",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(teamData),
-    };
+  const teamData = getTeamData();
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(teamData),
+  };
 
-    try {
-        const res = await fetch(`${API_URL}/admin/get-ids/${teamIdInput.value}`, options);
+  try {
+    const res = await fetch(`${API_URL}/admin/get-ids/${teamIdInput.value}`, options);
 
-        if (res.status === 200) {
-            alert("Data saved successfully");
-        } else {
-            console.error("Error saving data. Server responded with:", res.status);
-            // Log the response text for more details
-            const responseText = await res.text();
-            //alert(responseText);
-            console.error("Response Text:", responseText);
-            alert("Error saving data");
-        }
-    } catch (error) {
-        console.error("ERROR:", error);
+    if (res.status === 200) {
+      alert("Data saved successfully");
+    } else {
+      console.error("Error saving data. Server responded with:", res.status);
+      // Log the response text for more details
+      const responseText = await res.text();
+      //alert(responseText);
+      console.error("Response Text:", responseText);
+      alert("Error saving data");
     }
+  } catch (error) {
+    console.error("ERROR:", error);
+  }
 };
 
 
 
 const getTeamData = () => {
-    const teamData = {
-        collegeName: collegeNameInput.value,
-        teamName: teamNameInput.value,
-        isUG: categoryInput.value
-    };
-    return teamData;
+  const teamData = {
+    collegeName: collegeNameInput.value,
+    teamName: teamNameInput.value,
+    isUG: categoryInput.value
+  };
+  return teamData;
 };
 
 
@@ -206,37 +208,37 @@ const teamPayment = async (teamId) => {
   console.log(teamId);
 
   if (teamId) {
-      try {
-          const res = await fetch(`${API_URL}/team/${teamId}`);
-          const data = await res.json();
-          const paymentData = data.paymentStatus;
-          transChk.checked = paymentData.verificationStatus;
+    try {
+      const res = await fetch(`${API_URL}/team/${teamId}`);
+      const data = await res.json();
+      const paymentData = data.paymentStatus;
+      transChk.checked = paymentData.verificationStatus;
 
-          if(paymentData.screenshot){
-            paymentImg.style.display = 'block';
-            paymentImg.src = paymentData.screenshot
-          }
-          else{
-            paymentImg.style.display = 'none';
-          }
-
-          if(paymentData.transactionId){
-            transId.value = paymentData.transactionId;
-          }
-          
-          if (paymentData.verificationStatus) {
-            transChk.disabled = true;
-            savePaymentBtn.disabled = true;
-          } else {
-            transId.value = 'Payment still pending';
-            transChk.disabled = false;
-            savePaymentBtn.disabled = false;
-          }
-      } catch (error) {
-          console.error('Error fetching team data:', error);
+      if (paymentData.screenshot) {
+        paymentImg.style.display = 'block';
+        paymentImg.src = paymentData.screenshot
       }
+      else {
+        paymentImg.style.display = 'none';
+      }
+
+      if (paymentData.transactionId) {
+        transId.value = paymentData.transactionId;
+      }
+
+      if (paymentData.verificationStatus) {
+        transChk.disabled = true;
+        savePaymentBtn.disabled = true;
+      } else {
+        transId.value = 'Payment still pending';
+        transChk.disabled = false;
+        savePaymentBtn.disabled = false;
+      }
+    } catch (error) {
+      console.error('Error fetching team data:', error);
+    }
   } else {
-      console.error('Team ID is undefined.');
+    console.error('Team ID is undefined.');
   }
 };
 
@@ -244,36 +246,36 @@ savePaymentBtn.onclick = async (event) => {
 
   const paymentData = {
     paymentStatus: {
-        verificationStatus: transChk.checked
+      verificationStatus: transChk.checked
     }
-};
+  };
   const options = {
-      method: "PUT",
-      headers: {
-          "Content-Type": "application/json",
-      },
-      body: JSON.stringify(paymentData),
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(paymentData),
   };
 
   console.log(paymentData);
 
   try {
-      const res = await fetch(`${API_URL}/admin/update-team-status/${teamIdInput.value}`, options);
+    const res = await fetch(`${API_URL}/admin/update-team-status/${teamIdInput.value}`, options);
 
-      if (res.status === 200) {
-          return alert("Data saved successfully");
-      } 
-      else if(res.status == 400){
-        return alert(res.message);
-      }
-      else {
-          console.error("Error saving data. Server responded with:", res.status);
-          // Log the response text for more details
-          const responseText = await res.json();
-          console.error("Response Text:", responseText);
-      }
+    if (res.status === 200) {
+      return alert("Data saved successfully");
+    }
+    else if (res.status == 400) {
+      return alert(res.message);
+    }
+    else {
+      console.error("Error saving data. Server responded with:", res.status);
+      // Log the response text for more details
+      const responseText = await res.json();
+      console.error("Response Text:", responseText);
+    }
   } catch (error) {
-      console.error("ERROR:", error);
+    console.error("ERROR:", error);
   }
 };
 
@@ -282,28 +284,28 @@ savePaymentBtn.onclick = async (event) => {
 
 const accommoNo = async (teamId) => {
 
-    const res = await fetch(`${API_URL}/team/${teamId}`);
-    const data = await res.json();
+  const res = await fetch(`${API_URL}/team/${teamId}`);
+  const data = await res.json();
 
-    if (data.accommodation) {
-        accommocheck.value = 'Yes';
-        accommonb.value = data.accommodation.countOfBoys;
-        accommong.value = data.accommodation.countOfGirls;
-    }
-    else {
-        accommocheck.value = 'No';
-        accommonb.value = "0";
-        accommong.value = "0";
-    }
+  if (data.accommodation) {
+    accommocheck.value = 'Yes';
+    accommonb.value = data.accommodation.countOfBoys;
+    accommong.value = data.accommodation.countOfGirls;
+  }
+  else {
+    accommocheck.value = 'No';
+    accommonb.value = "0";
+    accommong.value = "0";
+  }
 };
 
 
 // events
 const events = async (teamId) => {
-    const eventData = new EventData(data);
-    const res = await fetch(`${API_URL}/team/${teamId}`);
-    const data = await res.json();
-    updateUITextFields(eventData);
+  const eventData = new EventData(data);
+  const res = await fetch(`${API_URL}/team/${teamId}`);
+  const data = await res.json();
+  updateUITextFields(eventData);
 
 };
 
@@ -639,34 +641,63 @@ const getEventData = () => {
 const eventSaveBtn = document.querySelector("#events-btn");
 
 eventSaveBtn.onclick = async () => {
-  if (checkValidation() == true) {
-    loader.style.display = "block";
-    const eventData = getEventData();
 
-    const options = {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(eventData),
-    };
+  loader.style.display = "block";
+  const eventData = getEventData();
 
-    try {
-      const res = await fetch(`${API_URL}/team/${teamId}`, options);
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(eventData),
+  };
 
-      if (res.status === 200) {
-        openAlert("Data saved successfully");
-      } else {
-        openAlert("Error saving data");
-      }
-    } catch (error) {
-      console.error("ERROR: " + error);
+  try {
+    const res = await fetch(`${API_URL}/team/${teamIdInput.value}`, options);
+
+    if (res.status === 200) {
+      openAlert("Data saved successfully");
+      loader.style.display = "none";
+    } else {
+      openAlert("Error saving data");
+      loader.style.display = "none";
     }
+  } catch (error) {
+    console.error("ERROR: " + error);
     loader.style.display = "none";
   }
+  
+
 };
 
 
+function openAlert(text) {
+  const alertBox = document.querySelector(".info");
+  const alertTitle = document.getElementById("alert-title");
+  const closeButton = document.querySelector(".info__close");
 
+  // Check if text is provided
+  if (text) {
+    // Set the alert title dynamically
+    alertTitle.textContent = text;
+
+    // Display the alert box
+    alertBox.style.display = "flex";
+
+    // Close the alert box after 3 seconds
+    setTimeout(closeAlert, 3000);
+    closeButton.addEventListener("click", closeAlert);
+  }
+}
+
+function closeAlert() {
+  const alertBox = document.querySelector(".info");
+  alertBox.style.display = "none";
+}
+//To close using close button
+document.querySelector(".info__close").addEventListener("click", function () {
+  closeAlert();
+});
 
 
