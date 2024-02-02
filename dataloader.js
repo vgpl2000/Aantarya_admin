@@ -249,9 +249,9 @@ savePaymentBtn.onclick = async (event) => {
 
 // accommodation
 
-const accommoNo = async (teamId) => {
+const accommoNo = async () => {
 
-  const res = await fetch(`${API_URL}/team/${teamId}`);
+  const res = await fetch(`${API_URL}/team/${teamIdInput.value}`);
   const data = await res.json();
 
   if (data.accommodation) {
@@ -265,6 +265,40 @@ const accommoNo = async (teamId) => {
     accommong.value = "0";
   }
 };
+
+
+const accommodationBtn = document.getElementById("accommo-btn");
+
+accommodationBtn.onclick = async () => {
+
+  const accommodationData = {
+    accommodation: {
+      countOfBoys: accommonb.value,
+      countOfGirls: accommong.value,
+    },
+  };
+  try {
+    const res = await fetch(`${API_URL}/team/${teamIdInput.value}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(accommodationData),
+    });
+    const data = await res.json();
+    console.log(data.accommodation);
+    openAlert("Updated Accommodation Details")
+  } catch (err) {
+    console.error(err);
+    openAlert("Error Updating Details")
+  }
+
+}
+
+
+
+
+
 
 
 // events
