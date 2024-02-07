@@ -154,39 +154,6 @@ const teamDetails = async (teamId) => {
 
 
 
-//save team details btn
-const saveBtn = document.querySelector("#team-btn");
-saveBtn.onclick = async (event) => {
-  const teamData = getTeamData();
-  const options = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      'auth-token': 'IDontKnowThePassword',
-    },
-    body: JSON.stringify(teamData),
-  };
-
-  try {
-    const res = await fetch(`${API_URL}/admin/get-ids/${teamIdInput.value}`, options);
-
-    if (res.status === 200) {
-      alert("Data saved successfully");
-    } else {
-      console.error("Error saving data. Server responded with:", res.status);
-      // Log the response text for more details
-      const responseText = await res.text();
-      //alert(responseText);
-      console.error("Response Text:", responseText);
-      alert("Error saving data");
-    }
-  } catch (error) {
-    console.error("ERROR:", error);
-  }
-};
-
-
-
 const getTeamData = () => {
   const teamData = {
     collegeName: collegeNameInput.value,
@@ -223,6 +190,7 @@ const teamPayment = async (teamId) => {
     try {
       const res = await fetch(`${API_URL}/team/${teamId}`);
       const data = await res.json();
+      console.log(data);
       const paymentData = data.paymentStatus;
       transChk.checked = paymentData.verificationStatus;
 
