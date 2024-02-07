@@ -9,11 +9,8 @@ document.getElementById("pass-txt").addEventListener("keydown", function (event)
             bodyele.style.display = "block";
             passdiv.style.display = "none";
         } else {
-            // alert("Incorrect password. Access denied.");
+            alert("Incorrect password. Access denied.");
         }
-        
-        passdiv.style.display = "none";
-        bodyele.style.display = "block";
     }
 });
 
