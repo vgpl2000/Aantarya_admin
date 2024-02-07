@@ -84,9 +84,20 @@ const dumbchMemCon2 = document.getElementById('dumb-mem2-con');
 const loader = document.getElementById("loader-lottie-div");
 
 
+
+
+const adminOptions = {
+  headers: {
+    'auth-token': 'IDontKnowThePassword',
+  },
+};
+
+
 const fetchTeams = async () => {
   try {
-    const response = await fetch(`${API_URL}/admin/get-ids`);
+    // add auth header to fetch
+
+    const response = await fetch(`${API_URL}/admin/get-ids`, adminOptions);
     const teams = await response.json();
     displayTeams(teams);
   } catch (error) {
@@ -130,7 +141,7 @@ const teamDetails = async (teamId) => {
 
   teamIdInput.value = teamId;
 
-  const res = await fetch(`${API_URL}/admin/get-ids/${teamId}`);
+  const res = await fetch(`${API_URL}/admin/get-ids/${teamId}`, adminOptions);
   const data = await res.json();
 
   teamNameInput.value = data.teamName;
@@ -151,6 +162,7 @@ saveBtn.onclick = async (event) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      'auth-token': 'IDontKnowThePassword',
     },
     body: JSON.stringify(teamData),
   };
@@ -209,7 +221,7 @@ const teamPayment = async (teamId) => {
 
   if (teamId) {
     try {
-      const res = await fetch(`${API_URL}/team/${teamId}`);
+      const res = await fetch(`${API_URL}/team/${teamId}`, adminOptions);
       const data = await res.json();
       const paymentData = data.paymentStatus;
       transChk.checked = paymentData.verificationStatus;
@@ -253,6 +265,7 @@ savePaymentBtn.onclick = async (event) => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      'auth-token': 'IDontKnowThePassword',
     },
     body: JSON.stringify(paymentData),
   };
@@ -284,7 +297,7 @@ savePaymentBtn.onclick = async (event) => {
 
 const accommoNo = async (teamId) => {
 
-  const res = await fetch(`${API_URL}/team/${teamId}`);
+  const res = await fetch(`${API_URL}/team/${teamId}`, adminOptions);
   const data = await res.json();
 
   if (data.accommodation) {
@@ -303,7 +316,7 @@ const accommoNo = async (teamId) => {
 // events
 const events = async (teamId) => {
   const eventData = new EventData(data);
-  const res = await fetch(`${API_URL}/team/${teamId}`);
+  const res = await fetch(`${API_URL}/team/${teamId}`, adminOptions);
   const data = await res.json();
   updateUITextFields(eventData);
 
@@ -544,7 +557,7 @@ const updateUITextFields = (eventData) => {
 
 const fetchData = async (teamId) => {
   try {
-    const response = await fetch(`${API_URL}/team/${teamId}`);
+    const response = await fetch(`${API_URL}/team/${teamId}`, adminOptions);
     const data = await response.json();
     return data;
   } catch (error) {
@@ -649,6 +662,7 @@ eventSaveBtn.onclick = async () => {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
+      'auth-token': 'IDontKnowThePassword',
     },
     body: JSON.stringify(eventData),
   };
