@@ -46,7 +46,7 @@
                         d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"
                         fill="#393a37"></path>
                 </svg></div>
-    
+
         </div>
 
         <nav class="navbar bg-body-tertiary">
@@ -82,17 +82,17 @@
             </div>
             <div class="row">
                 <p class="txt-content">Team Name</p>
-                <input class="txt-content" id="team-name" type="text" placeholder="Team Name">
+                <input class="txt-content" id="team-name" type="text" placeholder="Team Name" disabled>
             </div>
             <div class="row">
                 <p class="txt-content">College Name</p>
-                <input class="txt-content" id="clg-name" type="text" placeholder="College Name">
+                <input class="txt-content" id="clg-name" type="text" placeholder="College Name" disabled>
             </div>
             <div class="txt-content">
                 <p class="txt-desc">Category</p>
-                <input class="txt-content" id="category-input" type="text" value="UG">
+                <input class="txt-content" id="category-input" type="text" value="UG" disabled>
             </div>
-            <button class="button" id="team-btn">SAVE</button>
+            
 
         </div>
 
@@ -108,7 +108,7 @@
             <input class="txt-content" id="tran-id" type="text" placeholder="Transaction ID">
 
             <div class="pay-confirm">
-                <input id="pay-check-id"  class="check" type="checkbox">
+                <input id="pay-check-id" class="check" type="checkbox">
                 <p class="txt-content">Verification Status</p>
             </div>
 
@@ -279,23 +279,33 @@
 
             <div id="loader-lottie-div" class="loader">
                 <dotlottie-player id="loader-lottie" autoplay loop mode="normal"
-                    src="/Aantarya_admin/assets/loader-yellow.lottie" style="width: 70px;height:70px;"></dotlottie-player>
+                    src="/Aantarya_admin/assets/loader-yellow.lottie"
+                    style="width: 70px;height:70px;"></dotlottie-player>
             </div>
 
             <button class="button" id="events-btn">SAVE</button>
 
         </div>
 
-        
+
         <div class="line"></div>
 
-       
+
 
         <div class="downloads-div">
             <p class="txt-headings">Generate PDFs</p>
+            <div class="loading-center">
+                <div id="loader-lottie-div-dumb" class="loader">
+                    <dotlottie-player id="loader-lottie" autoplay loop mode="normal"
+                        src="/Aantarya_admin/assets/loader-yellow.lottie"
+                        style="width: 70px;height:70px;"></dotlottie-player>
+                </div>
+            </div>
+
             <div class="pdf-contents">
                 <div class="row1">
                     <p class="txt-content">Dumb Charades</p>
+
                     <button class="Btn" id="dumb-down">
                         <svg class="svgIcon" viewBox="0 0 384 512" height="1em" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -305,6 +315,7 @@
                         <span class="icon2"></span>
                         <span class="tooltip">Download</span>
                     </button>
+
                 </div>
                 <div class="row1">
                     <p class="txt-content">Product Launch</p>

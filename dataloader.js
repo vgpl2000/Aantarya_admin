@@ -276,10 +276,10 @@ savePaymentBtn.onclick = async (event) => {
     const res = await fetch(`${API_URL}/admin/update-team-status/${teamIdInput.value}`, options);
 
     if (res.status === 200) {
-      return alert("Data saved successfully");
+      return openAlert("Data saved successfully");
     }
     else if (res.status == 400) {
-      return alert(res.message);
+      return openAlert(res.message);
     }
     else {
       console.error("Error saving data. Server responded with:", res.status);
@@ -295,9 +295,9 @@ savePaymentBtn.onclick = async (event) => {
 
 // accommodation
 
-const accommoNo = async (teamId) => {
+const accommoNo = async () => {
 
-  const res = await fetch(`${API_URL}/team/${teamId}`, adminOptions);
+  const res = await fetch(`${API_URL}/team/${teamIdInput.value}`, adminOptions);
   const data = await res.json();
 
   if (data.accommodation) {
@@ -311,6 +311,40 @@ const accommoNo = async (teamId) => {
     accommong.value = "0";
   }
 };
+
+
+const accommodationBtn = document.getElementById("accommo-btn");
+
+accommodationBtn.onclick = async () => {
+
+  const accommodationData = {
+    accommodation: {
+      countOfBoys: accommonb.value,
+      countOfGirls: accommong.value,
+    },
+  };
+  try {
+    const res = await fetch(`${API_URL}/team/${teamIdInput.value}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(accommodationData),
+    });
+    const data = await res.json();
+    console.log(data.accommodation);
+    openAlert("Updated Accommodation Details")
+  } catch (err) {
+    console.error(err);
+    openAlert("Error Updating Details")
+  }
+
+}
+
+
+
+
+
 
 
 // events
@@ -681,7 +715,7 @@ eventSaveBtn.onclick = async () => {
     console.error("ERROR: " + error);
     loader.style.display = "none";
   }
-  
+
 
 };
 
@@ -713,5 +747,64 @@ function closeAlert() {
 document.querySelector(".info__close").addEventListener("click", function () {
   closeAlert();
 });
+
+
+const dumbDownBtn = document.getElementById("dumb-down");
+const productDownBtn = document.getElementById("product-down");
+const thuntDownBtn = document.getElementById("thunt-down");
+const gameDownBtn = document.getElementById("game-down");
+const photoDownBtn = document.getElementById("photo-down");
+const danceDownBtn = document.getElementById("dance-down");
+const debateDownBtn = document.getElementById("debate-down");
+const quizDownBtn = document.getElementById("quiz-down");
+const webDownBtn = document.getElementById("web-down");
+const codingDownBtn = document.getElementById("coding-down");
+const itmanDownBtn = document.getElementById("itman-down");
+const desigDownBtn = document.getElementById("desig-down");
+
+const loaderDumb = document.getElementById("loader-lottie-div-dumb");
+
+
+// Function to handle button click and initiate download
+const handleButtonClick = async (apiEndpoint, fileName) => {
+
+  try {
+    loaderDumb.style.display = "block";
+    const response = await fetch(`${API_URL}/admin/${apiEndpoint}`);
+
+    if (!response.ok) {
+      loaderDumb.style.display = "none";
+      throw new Error('Failed to fetch data');
+    }
+
+    const blob = await response.blob();
+    const blobUrl = URL.createObjectURL(blob);
+    const downloadLink = document.createElement('a');
+
+    downloadLink.href = blobUrl;
+    downloadLink.download = fileName;
+    downloadLink.click();
+
+    URL.revokeObjectURL(blobUrl);
+  } catch (error) {
+    openAlert(error);
+    loaderDumb.style.display = "none";
+  }
+  loaderDumb.style.display = "none";
+};
+
+// Attach click event handlers to each button
+dumbDownBtn.onclick = () => handleButtonClick('get-dumbcharades-mems', 'dumbcharades_members.pdf');
+productDownBtn.onclick = () => handleButtonClick('get-productlaunch-mems', 'productlaunch_members.pdf');
+thuntDownBtn.onclick = () => handleButtonClick('get-treasure-mems', 'treasure_members.pdf');
+gameDownBtn.onclick = () => handleButtonClick('get-gaming-mems', 'gaming_members.pdf');
+photoDownBtn.onclick = () => handleButtonClick('get-photography-mems', 'photography_members.pdf');
+danceDownBtn.onclick = () => handleButtonClick('get-dance-mems', 'dance_members.pdf');
+debateDownBtn.onclick = () => handleButtonClick('get-debate-mems', 'debate_members.pdf');
+quizDownBtn.onclick = () => handleButtonClick('get-quiz-mems', 'quiz_members.pdf');
+webDownBtn.onclick = () => handleButtonClick('get-web-mems', 'web_members.pdf');
+codingDownBtn.onclick = () => handleButtonClick('get-coding-mems', 'coding_members.pdf');
+itmanDownBtn.onclick = () => handleButtonClick('get-itmanger-mems', 'itmanger_members.pdf');
+desigDownBtn.onclick = () => handleButtonClick('get-designing-mems', 'designing_members.pdf');
 
 
