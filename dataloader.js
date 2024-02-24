@@ -6,6 +6,7 @@ const teamIdInput = document.getElementById("team-id");
 const teamNameInput = document.getElementById("team-name");
 const collegeNameInput = document.getElementById("clg-name");
 const categoryInput = document.getElementById("category-input");
+const teamEmail = document.getElementById("team-email");
 
 const paymentImg = document.getElementById("screenshot");
 const transId = document.getElementById("tran-id");
@@ -148,7 +149,7 @@ const teamDetails = async (teamId) => {
   collegeNameInput.value = data.collegeName;
 
   categoryInput.value = data.isUG ? 'UG' : 'PG';
-
+  // console.log(data);
 
 };
 
@@ -184,13 +185,14 @@ const displayPGFields = () => {
 
 const savePaymentBtn = document.querySelector("#payment-btn");
 const teamPayment = async (teamId) => {
-  console.log(teamId);
+  // console.log(teamId);
 
   if (teamId) {
     try {
       const res = await fetch(`${API_URL}/team/${teamId}`);
       const data = await res.json();
-      console.log(data);
+      // console.log(data);
+      teamEmail.value = data.email;
       const paymentData = data.paymentStatus;
       transChk.checked = paymentData.verificationStatus;
 
@@ -238,7 +240,7 @@ savePaymentBtn.onclick = async (event) => {
     body: JSON.stringify(paymentData),
   };
 
-  console.log(paymentData);
+  // console.log(paymentData);
 
   try {
     const res = await fetch(`${API_URL}/admin/update-team-status/${teamIdInput.value}`, options);
@@ -300,7 +302,7 @@ accommodationBtn.onclick = async () => {
       body: JSON.stringify(accommodationData),
     });
     const data = await res.json();
-    console.log(data.accommodation);
+    // console.log(data.accommodation);
     openAlert("Updated Accommodation Details")
   } catch (err) {
     console.error(err);
