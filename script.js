@@ -15,7 +15,7 @@ document.getElementById("pass-txt").addEventListener("keydown", function (event)
 });
 
 
-// const bodyele = document.getElementById("body-id");
-// const passdiv = document.getElementById("pass-div");
-// bodyele.style.display = "block";
-// passdiv.style.display = "none";
+const bodyele = document.getElementById("body-id");
+const passdiv = document.getElementById("pass-div");
+bodyele.style.display = "block";
+passdiv.style.display = "none";

@@ -731,7 +731,7 @@ const codingDownBtn = document.getElementById("coding-down");
 const itmanDownBtn = document.getElementById("itman-down");
 const desigDownBtn = document.getElementById("desig-down");
 
-const loaderDumb = document.getElementById("loader-lottie-div-dumb");
+const loaderDumb = document.getElementById("loader-lottie-div");
 
 
 // Function to handle button click and initiate download
