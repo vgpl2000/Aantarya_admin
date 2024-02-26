@@ -447,6 +447,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  row-gap: 1rem;
 }
 
 
