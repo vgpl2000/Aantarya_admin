@@ -285,31 +285,31 @@ const accommoNo = async () => {
 
 const accommodationBtn = document.getElementById("accommo-btn");
 
-accommodationBtn.onclick = async () => {
+// accommodationBtn.onclick = async () => {
 
-  const accommodationData = {
-    accommodation: {
-      countOfBoys: accommonb.value,
-      countOfGirls: accommong.value,
-    },
-  };
-  try {
-    const res = await fetch(`${API_URL}/team/${teamIdInput.value}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(accommodationData),
-    });
-    const data = await res.json();
-    // console.log(data.accommodation);
-    openAlert("Updated Accommodation Details")
-  } catch (err) {
-    console.error(err);
-    openAlert("Error Updating Details")
-  }
+//   const accommodationData = {
+//     accommodation: {
+//       countOfBoys: accommonb.value,
+//       countOfGirls: accommong.value,
+//     },
+//   };
+//   try {
+//     const res = await fetch(`${API_URL}/team/${teamIdInput.value}`, {
+//       method: "PUT",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(accommodationData),
+//     });
+//     const data = await res.json();
+//     // console.log(data.accommodation);
+//     openAlert("Updated Accommodation Details")
+//   } catch (err) {
+//     console.error(err);
+//     openAlert("Error Updating Details")
+//   }
 
-}
+// }
 
 
 
@@ -657,36 +657,36 @@ const getEventData = () => {
 
 const eventSaveBtn = document.querySelector("#events-btn");
 
-eventSaveBtn.onclick = async () => {
+// eventSaveBtn.onclick = async () => {
 
-  loader.style.display = "block";
-  const eventData = getEventData();
+//   loader.style.display = "block";
+//   const eventData = getEventData();
 
-  const options = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(eventData),
-  };
+//   const options = {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(eventData),
+//   };
 
-  try {
-    const res = await fetch(`${API_URL}/team/${teamIdInput.value}`, options);
+//   try {
+//     const res = await fetch(`${API_URL}/team/${teamIdInput.value}`, options);
 
-    if (res.status === 200) {
-      openAlert("Data saved successfully");
-      loader.style.display = "none";
-    } else {
-      openAlert("Error saving data");
-      loader.style.display = "none";
-    }
-  } catch (error) {
-    console.error("ERROR: " + error);
-    loader.style.display = "none";
-  }
+//     if (res.status === 200) {
+//       openAlert("Data saved successfully");
+//       loader.style.display = "none";
+//     } else {
+//       openAlert("Error saving data");
+//       loader.style.display = "none";
+//     }
+//   } catch (error) {
+//     console.error("ERROR: " + error);
+//     loader.style.display = "none";
+//   }
 
 
-};
+// };
 
 
 function openAlert(text) {
