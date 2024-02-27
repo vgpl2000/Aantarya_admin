@@ -730,6 +730,9 @@ const webDownBtn = document.getElementById("web-down");
 const codingDownBtn = document.getElementById("coding-down");
 const itmanDownBtn = document.getElementById("itman-down");
 const desigDownBtn = document.getElementById("desig-down");
+const teamListDownBtn = document.getElementById("team-list-down");
+const collegeListDonwBtn = document.getElementById("college-list-down");
+
 
 const loaderDumb = document.getElementById("loader-lottie-div");
 
@@ -775,5 +778,6 @@ webDownBtn.onclick = () => handleButtonClick('get-web-mems', 'web_members.pdf');
 codingDownBtn.onclick = () => handleButtonClick('get-coding-mems', 'coding_members.pdf');
 itmanDownBtn.onclick = () => handleButtonClick('get-itmanger-mems', 'itmanger_members.pdf');
 desigDownBtn.onclick = () => handleButtonClick('get-designing-mems', 'designing_members.pdf');
-
+teamListDownBtn.onclick = () => handleButtonClick('get-team-without-college', 'teams_list.pdf');
+collegeListDonwBtn.onclick = () => handleButtonClick('get-team-by-college', 'colleges_list.pdf');
 
